@@ -16,7 +16,7 @@ func serveDynamic (w http.ResponseWriter, r *http.Request) {
 }
 
 func serveStatic (w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "static.html")
+	http.ServeFile(w, r, "var/www/static.html")
 }
 
 func main () {
