@@ -30,7 +30,7 @@ func main () {
 		})
 	})
 
-	routes.GET("/pages", func (c *gin.Context) {
+	routes.GET("/", func (c *gin.Context) {
 		filePath := "./var/www/static.html"
 		c.File(filePath)
 	})
@@ -47,6 +47,10 @@ func main () {
 		}
 		filePath := "./var/www/"+file.ID+".html"
 		c.File(filePath)
+	})
+
+	routes.NoRoute(func(c *gin.Context) {
+		c.File("./var/www/not-found.html")
 	})
 
 	routes.Run()
