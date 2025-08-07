@@ -8,4 +8,9 @@ type Page struct {
 	Content template.HTML
 	Date string
 	GUID string
+	Session Session
+}
+
+type JSONResponse struct {
+	Fields map[string]string
 }

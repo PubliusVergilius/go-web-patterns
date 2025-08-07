@@ -1,1 +1,1 @@
-go run blog/main.go blog/routes.go blog/page.go
+go run blog/main.go blog/routes.go blog/types.go

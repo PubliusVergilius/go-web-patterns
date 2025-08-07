@@ -4,10 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{.Title}}</title>
+    <style>
+     .hidden {
+      display: none;
+     } 
+    </style>
   </head>
   <body>
     <h1>{{.Title}}</h1>
     <p>{{.Content}}</p>
     <div>{{.Date}}</div>
+    <div id="comments">
+      <form action="/api/comments" method="POST">
+      <input type="hidden" style="hidden" name="guid" value="{{.GUID}}" />
+      <div>
+        <input type="text" name="name" placeholder="Your Name" />
+      <div>
+        <input type="email" name="email" placeholder="Your Email" />
+      </div>
+      <div>
+        <textarea name="comments" placeholder="Your Comments"></textarea>
+      </div>
+      <div>
+        <input type="submit" value="Add Comments" />
+      </div>
+      </form>
+    </div>
   </body>
 </html>
