@@ -1,0 +1,1 @@
+go run blog/main.go blog/routes.go blog/page.go

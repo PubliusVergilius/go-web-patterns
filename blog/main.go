@@ -17,18 +17,12 @@ const (
 	DBUser = "exampleuser"
 	DBPass = "examplepass"
 	DBDbase = "exampledb"
-	PORT =":8081"
+	PORT =":8443"
 )
 
 var database *sql.DB
 
-type Page struct {
-	Title string
-	RawContent string
-	Content template.HTML
-	Date string
-	GUID string
-}
+
 func (p Page) TruncatedText () string {
 	chars := 0
 	for i := range p.Content {
@@ -98,16 +92,22 @@ func main()  {
 
 	database = db
 
-	routes := gin.Default()
-	routes.LoadHTMLGlob("templates/*")
+	router := gin.Default()
+	router.LoadHTMLGlob("templates/*")
 
-	routes.GET("/", RedirIndex)
-	routes.GET("/home", ServerIndex)
+	router.GET("/", RedirIndex)
+	router.GET("/home", ServerIndex)
 
-	routes.GET("/page/:guid", ServePage)
+	router.GET("/page/:guid", ServePage)
 
-	routes.GET("/not-found", NotFound)
-	routes.NoRoute(NotFound)
+	router.GET("/not-found", NotFound)
+	router.NoRoute(NotFound)
 
-	routes.Run(PORT)
+	RouteAPI(router)
+
+	// HTTP
+	// router.Run(PORT)
+
+	// HTTPS
+	log.Fatal(router.RunTLS(PORT, "server.crt", "server.key"))
 }
