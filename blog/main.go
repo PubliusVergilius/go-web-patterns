@@ -11,21 +11,21 @@ import (
 )
 
 const (
-	DBHOST = "127.0.0.1"
-	DBPORT = ":3306"
-	DBUser = "exampleuser"
-	DBPass = "examplepass"
+	DBHOST  = "127.0.0.1"
+	DBPORT  = ":3306"
+	DBUser  = "exampleuser"
+	DBPass  = "examplepass"
 	DBDbase = "exampledb"
-	PORT =":8443"
+	PORT    = ":8443"
 )
 
 var database *sql.DB
 
-func NotFound (c *gin.Context) {
-		c.HTML(http.StatusNotFound, "not-found.tmpl", gin.H{})
+func NotFound(c *gin.Context) {
+	c.HTML(http.StatusNotFound, "not-found.tmpl", gin.H{})
 }
 
-func main()  {
+func main() {
 	dbConn := fmt.Sprintf("%s:%s@tcp(%s)/%s", DBUser, DBPass, DBHOST, DBDbase)
 	db, err := sql.Open("mysql", dbConn)
 	if err != nil {
@@ -37,8 +37,6 @@ func main()  {
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
-
-	
 
 	router.NoRoute(NotFound)
 	RoutePages(router)

@@ -8,13 +8,17 @@
      .hidden {
       display: none;
      } 
+     hr {
+      border: none;
+      border-top: 1px solid gray;
+     }
     </style>
   </head>
   <body>
     <h1>{{.Title}}</h1>
     <p>{{.Content}}</p>
     <div>{{.Date}}</div>
-    <div id="comments">
+    <section id="comments">
       <form action="/api/comments" method="POST">
       <input type="hidden" style="hidden" name="guid" value="{{.GUID}}" />
       <div>
@@ -29,6 +33,16 @@
         <input type="submit" value="Add Comments" />
       </div>
       </form>
-    </div>
+      <div>
+       {{/*<pre>{{ printf "%#v" . }}</pre>*/}}
+       <hr>
+      <h3>Comments<h3>
+       {{range .Comments}}
+        <h4>{{ .Name }}</h4>
+        <p>{{ .CommentText }}</p>
+        <hr>
+       {{end}}
+      <div>
+    </section>
   </body>
 </html>
